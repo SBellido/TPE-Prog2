@@ -26,7 +26,7 @@ public class Juego {
 			this.jugadorA.jugar();
 			this.jugadorB.jugar();
 			this.finDeJuego(ronda);
-			
+			ronda++;
 		}
 	}
 	
