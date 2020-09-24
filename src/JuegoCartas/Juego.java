@@ -20,11 +20,20 @@ public class Juego {
 		return false;
 	}
 	
-	public void rondaJuego() {		
+	public void rondaJuego() {
+		int ronda = 0;
+		while (ronda < maxRondas) {
+			this.jugadorA.jugar();
+			this.jugadorB.jugar();
+			this.finDeJuego(ronda);
+			
+		}
 	}
 	
-	public boolean finDeJuego() {
-		return false;
+	public boolean finDeJuego(int ronda) {
+		return (this.getMaxRondas() == ronda || 
+				this.jugadorA.contarCartas() == 0 || 
+				this.jugadorB.contarCartas() == 0);
 	}
 	
 // GETTERS & SETTERS

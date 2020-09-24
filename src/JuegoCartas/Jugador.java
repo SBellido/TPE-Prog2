@@ -9,10 +9,10 @@ public class Jugador {
 		this.cartas = new MazoCartas();
 	}
 
-	private void jugar() {
+	public void jugar() {
 		
 	}
-	private int contarCartas() {
+	public int contarCartas() {
 		return this.cartas.getCantidad();
 	}
 	
