@@ -23,7 +23,8 @@ public class Carta {
 
 	@Override
 	public String toString() {
-		return "ID de Carta: " + id + "\nAtributos: " + atributos;
+		return "\nID de Carta: " + this.getId() + 
+				"\nAtributos: " + this.getAtributos();
 	}
 
 	// GETTERS & SETTERS

@@ -19,33 +19,57 @@ public class MazoCartas {
 		return false;
 	}
 
-	public void agregarCarta(Carta carta) {
-		if (!this.mazo.contains(carta))
-			this.mazo.add(carta);
+	public boolean contieneCarta(Carta carta) {
+		return this.mazo.contains(carta);
 	}
 
-	public int getMazoCompleto() {
+	public boolean estaVacio() {
+		return this.mazo.isEmpty();
+	}
+
+	public void agregarCarta(Carta carta) {
+		if (this.estaVacio()) {
+			this.mazo.add(carta);
+		} else if (!contieneCarta(carta)) {
+			this.mazo.add(carta);
+		}
+	}
+
+	public int getCantMazoCompleto() {
 		return this.mazo.size();
 	}
 
 	public void repartirCartas(Jugador jugadorA, Jugador jugadorB) {
 		int cantidad = this.getCantidad();
-		int mazoCompleto = getMazoCompleto();
+		int mazoCompleto = this.getCantMazoCompleto();	
 		if (cantidad == mazoCompleto) {
-			for (int i = 0; i < this.mazo.size() / 2; i++) {
-				Carta carta = this.mazo.get(i);
-				jugadorA.agregarCarta(carta);
-			}
-			for (int i = this.mazo.size() / 2; i < this.mazo.size(); i++) {
-				Carta carta = this.mazo.get(i);
-				jugadorB.agregarCarta(carta);
-			}
+			this.darPrimeraMitad(jugadorA);
+			this.darSegundaMitad(jugadorB);
 		}
+	}
+
+	public void darPrimeraMitad(Jugador jugador) {
+		MazoCartas mazo = new MazoCartas(this.mazo.size() / 2);
+		for (int i = 0; i < this.mazo.size() / 2; i++) {
+			Carta carta = this.mazo.get(i);
+			mazo.agregarCarta(carta);
+		}
+		jugador.agarrarCartas(mazo);
+	}
+
+	public void darSegundaMitad(Jugador jugador) {
+		MazoCartas mazo = new MazoCartas(this.mazo.size() / 2);
+		for (int i = this.mazo.size() / 2; i < this.mazo.size(); i++) {
+			Carta carta = this.mazo.get(i);
+			mazo.agregarCarta(carta);
+		}
+		jugador.agarrarCartas(mazo);
 	}
 
 	@Override
 	public String toString() {
-		return "Cantidad de cartas: " + cantidad + "\nMazo: " + mazo;
+		return "\nCantidad de cartas: " + this.getCantMazoCompleto() + 
+				"\nMazo: " + this.getMazo();
 	}
 
 	// GETTERS & SETTERS

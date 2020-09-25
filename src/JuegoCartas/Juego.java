@@ -36,8 +36,10 @@ public class Juego {
 
 	@Override
 	public String toString() {
-		return "JUEGO" + "\nMáximo de rondas: " + this.getMaxRondas() + "\nJugador A: " + this.getJugadorA()
-				+ "\nJugador B: " + this.getJugadorB() + "\nMazo: " + this.getMazo();
+		return "\nJUEGO" + 
+				"\nMáximo de rondas: " + this.getMaxRondas() + 
+				"\nJugador A: " + this.getJugadorA() +
+				"\nJugador B: " + this.getJugadorB();
 	}
 
 	// GETTERS & SETTERS
