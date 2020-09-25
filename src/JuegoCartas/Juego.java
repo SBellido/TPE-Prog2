@@ -20,13 +20,11 @@ public class Juego {
 		return false;
 	}
 	
-	public void rondaJuego() {
-		int ronda = 0;
-		while (ronda < maxRondas) {
+	public void jugar() {
+		for (int ronda = 0; ronda < this.maxRondas; ronda++) {
 			this.jugadorA.jugar();
 			this.jugadorB.jugar();
-			this.finDeJuego(ronda);
-			ronda++;
+			this.finDeJuego(ronda);		
 		}
 	}
 	
@@ -36,7 +34,16 @@ public class Juego {
 				this.jugadorB.contarCartas() == 0);
 	}
 	
-// GETTERS & SETTERS
+
+	@Override
+	public String toString() {
+		return "JUEGO" + 
+				"\nMáximo de rondas: " + this.getMaxRondas() + 
+				"\nJugador A: " + this.getJugadorA().getNombre() + 
+				"\nJugador B: " + this.getJugadorB().getNombre();
+	}
+
+	// GETTERS & SETTERS
 	public int getMaxRondas() {
 		return maxRondas;
 	}
