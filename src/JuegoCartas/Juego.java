@@ -19,12 +19,20 @@ public class Juego {
 	public boolean esGanador() {
 		return false;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 55a9245272a0c7861add3423409e028914d51395
 	public void jugar() {
 		for (int ronda = 0; ronda < this.maxRondas; ronda++) {
 			this.jugadorA.jugar();
 			this.jugadorB.jugar();
+<<<<<<< HEAD
 			this.finDeJuego(ronda);
+=======
+			this.finDeJuego(ronda);		
+>>>>>>> 55a9245272a0c7861add3423409e028914d51395
 		}
 	}
 
@@ -37,8 +45,22 @@ public class Juego {
 		return "JUEGO" + "\nMáximo de rondas: " + this.getMaxRondas() + "\nJugador A: " + this.getJugadorA().getNombre()
 				+ "\nJugador B: " + this.getJugadorB().getNombre();
 	}
+<<<<<<< HEAD
 
 // GETTERS & SETTERS
+=======
+	
+
+	@Override
+	public String toString() {
+		return "JUEGO" + 
+				"\nMáximo de rondas: " + this.getMaxRondas() + 
+				"\nJugador A: " + this.getJugadorA().getNombre() + 
+				"\nJugador B: " + this.getJugadorB().getNombre();
+	}
+
+	// GETTERS & SETTERS
+>>>>>>> 55a9245272a0c7861add3423409e028914d51395
 	public int getMaxRondas() {
 		return maxRondas;
 	}
