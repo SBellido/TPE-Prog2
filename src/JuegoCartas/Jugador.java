@@ -5,33 +5,40 @@ public class Jugador {
 	private int numbreId;
 	private String nombre;
 	private MazoCartas cartas;
-	private boolean esGanador= false;
-	
+	private boolean esGanador;
+
 	public Jugador(String nombre) {
 		this.nombre = nombre;
 		this.numbreId = id++;
+		this.esGanador = false;
 	}
 
-	public Carta jugar() {
+	public Carta seleccionarCarta() {
 		Carta carta = null;
-		if(this.cartas != null) {
+		if (this.cartas != null) {
 			carta = this.cartas.getCarta();
 		}
 		return carta;
 	}
 
+	public Atributo elegirAtributo(Carta carta, int cantAtributo) {
+		int atributoRandom = (int) (Math.random() * cantAtributo) + 1;
+		Atributo atributo = carta.buscarAtributo(atributoRandom);
+		return atributo;
+	}
+
 	public int contarCartas() {
 		return this.cartas.getCantidad();
 	}
-	
-	public void agarrarCartas(MazoCartas mazo) {	
-		this.setCartas(mazo);	
+
+	public void agarrarCartas(MazoCartas mazo) {
+		this.setCartas(mazo);
 	}
-	
+
 	public void gana() {
 		this.setEsGanador(true);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		try {
@@ -44,11 +51,8 @@ public class Jugador {
 
 	@Override
 	public String toString() {
-		return "\n------------------------------" + 
-				"\nJUGADOR" + 
-				"\nNombre: " + this.getNombre() +
-				"\nID: " + this.getNumbreId() +
-				"\nCartas: " + this.getCartas();
+		return "\n------------------------------" + "\nJUGADOR" + "\nNombre: " + this.getNombre() + "\nID: "
+				+ this.getNumbreId() + "\nCartas: " + this.getCartas();
 	}
 
 //	GETTERS & SETTERS
@@ -59,23 +63,25 @@ public class Jugador {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public void setCartas(MazoCartas mazo) {
 		this.cartas = mazo;
 	}
+
 	public MazoCartas getCartas() {
 		return this.cartas;
 	}
+
 	public int getNumbreId() {
 		return numbreId;
 	}
 
-	public boolean isEsGanador() {
-		return esGanador;
+	public boolean esGanador() {
+		return this.esGanador;
 	}
 
 	public void setEsGanador(boolean esGanador) {
 		this.esGanador = esGanador;
 	}
 
-	
 }
