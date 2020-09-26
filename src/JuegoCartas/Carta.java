@@ -12,6 +12,22 @@ public class Carta {
 		this.atributos = new ArrayList<>();
 	}
 
+	public boolean tieneAtributo(Atributo atributo) {
+		return this.atributos.contains(atributo);
+	}
+	
+	public void agregarAtributo(Atributo atributo) {
+		if (!tieneAtributo(atributo)) {
+			this.atributos.add(atributo);			
+		}
+	}
+	
+	public boolean esGanadora(Carta carta, int atributo) {
+		return false;
+	 
+	}
+	
+	@Override
 	public boolean equals(Object obj) {
 		try {
 			Carta aux = (Carta) obj;

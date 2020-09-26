@@ -5,14 +5,19 @@ public class Jugador {
 	private int numbreId;
 	private String nombre;
 	private MazoCartas cartas;
-
+	private boolean esGanador= false;
+	
 	public Jugador(String nombre) {
 		this.nombre = nombre;
 		this.numbreId = id++;
-		this.cartas = new MazoCartas();
 	}
 
-	public void jugar() {
+	public Carta jugar() {
+		Carta carta = null;
+		if(this.cartas != null) {
+			carta = this.cartas.getCarta();
+		}
+		return carta;
 	}
 
 	public int contarCartas() {
@@ -22,7 +27,11 @@ public class Jugador {
 	public void agarrarCartas(MazoCartas mazo) {	
 		this.setCartas(mazo);	
 	}
-
+	
+	public void gana() {
+		this.setEsGanador(true);
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		try {
@@ -58,6 +67,14 @@ public class Jugador {
 	}
 	public int getNumbreId() {
 		return numbreId;
+	}
+
+	public boolean isEsGanador() {
+		return esGanador;
+	}
+
+	public void setEsGanador(boolean esGanador) {
+		this.esGanador = esGanador;
 	}
 
 	

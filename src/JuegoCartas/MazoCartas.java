@@ -15,6 +15,11 @@ public class MazoCartas {
 		this.mazo = new ArrayList<>();
 	}
 
+	
+	public Carta getCarta() {		
+		return this.getMazo().get(this.mazo.size()-1);
+	}
+	
 	public boolean verificarCartas() {
 		return false;
 	}
@@ -49,8 +54,9 @@ public class MazoCartas {
 	}
 
 	public void darPrimeraMitad(Jugador jugador) {
-		MazoCartas mazo = new MazoCartas(this.mazo.size() / 2);
-		for (int i = 0; i < this.mazo.size() / 2; i++) {
+		int mitadMazo = getCantMazoCompleto() / 2;
+		MazoCartas mazo = new MazoCartas(mitadMazo);
+		for (int i = 0; i < mitadMazo; i++) {
 			Carta carta = this.mazo.get(i);
 			mazo.agregarCarta(carta);
 		}
@@ -58,8 +64,9 @@ public class MazoCartas {
 	}
 
 	public void darSegundaMitad(Jugador jugador) {
-		MazoCartas mazo = new MazoCartas(this.mazo.size() / 2);
-		for (int i = this.mazo.size() / 2; i < this.mazo.size(); i++) {
+		int mitadMazo = getCantMazoCompleto()  / 2;
+		MazoCartas mazo = new MazoCartas(mitadMazo);
+		for (int i = mitadMazo; i < getCantMazoCompleto(); i++) {
 			Carta carta = this.mazo.get(i);
 			mazo.agregarCarta(carta);
 		}

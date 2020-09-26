@@ -14,22 +14,30 @@ public class Juego {
 	}
 
 	public void asignarTurno() {
+		
 	}
 
 	public boolean esGanador() {
 		return false;
 	}
 
-	public void jugar() {
+	public void jugar() {	
 		for (int ronda = 0; ronda < this.maxRondas; ronda++) {
-			this.jugadorA.jugar();
-			this.jugadorB.jugar();
-			this.finDeJuego(ronda);
+			Carta cartaA = this.jugadorA.jugar();
+			Carta cartaB = this.jugadorB.jugar();		
+			if (this.finDeJuego()) {
+				ronda = this.maxRondas;
+			}
+			if (cartaA.esGanadora(cartaB, 0)) {
+				this.jugadorA.gana();
+			}
+			
 		}
 	}
 
-	public boolean finDeJuego(int ronda) {
-		return (this.getMaxRondas() == ronda || this.jugadorA.contarCartas() == 0 || this.jugadorB.contarCartas() == 0);
+	public boolean finDeJuego() {
+		return (this.jugadorA.contarCartas() == 0 || 
+				this.jugadorB.contarCartas() == 0);
 	}
 
 // GETTERS & SETTERS
