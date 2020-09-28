@@ -39,7 +39,14 @@ public class MazoCartas {
 			this.mazo.add(carta);
 		}
 	}
-
+	
+	public void eliminarCarta(Carta cartaPerdedora) {
+		if (contieneCarta(cartaPerdedora)) {
+			 this.mazo.remove(this.mazo.indexOf(cartaPerdedora));
+		}
+			
+	}
+	
 	public int getCantMazoCompleto() {
 		return this.mazo.size();
 	}

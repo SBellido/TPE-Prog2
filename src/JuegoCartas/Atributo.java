@@ -10,7 +10,10 @@ public class Atributo {
 		this.valor = valor;
 	}
 
-	
+	public boolean esGanador(double atributoValor) {		
+		return this.valor > atributoValor;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		try {
@@ -23,8 +26,7 @@ public class Atributo {
 	
 	@Override
 	public String toString() {
-		return "\nATRIBUTO" + 
-				"\nNombre: " + this.getNombre() + 
+		return "\nATRIBUTO: " + this.getNombre() + 
 				"\nValor: " + this.getValor();
 	}
 

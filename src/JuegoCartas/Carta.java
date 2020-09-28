@@ -6,19 +6,18 @@ import java.util.List;
 public class Carta {
 	private String id;
 	List<Atributo> atributos;
-	private int cantAtributos;
+	private static int cantAtributos = 5;
 
-	public Carta(String id, int cantAtributos) {
+	public Carta(String id) {
 		this.id = id;
 		this.atributos = new ArrayList<>();
-		this.cantAtributos = cantAtributos;
 	}
 
 	public boolean tieneAtributo(Atributo atributo) {
 		return this.atributos.contains(atributo);
 	}
 
-	public Atributo buscarAtributo(int indiceAtributo) {
+	public Atributo buscarAtributoPorIndice(int indiceAtributo) {
 		Atributo atributoElegido = this.atributos.get(indiceAtributo);
 		return atributoElegido;
 	}
@@ -29,19 +28,18 @@ public class Carta {
 		}
 	}
 
-	public void compararAtributo(Carta carta, Atributo atributoElegido) {
+	public boolean esGanadora(Atributo atributoElegido) {
+		double atributoValor = atributoElegido.getValor();
 		for (Atributo atributo : this.atributos) {
 			if (atributo.equals(atributoElegido)) {
-
+				return atributo.esGanador(atributoValor);
 			}
 		}
-	}
-
-	public boolean esGanadora(Carta carta, int atributo) {
 		return false;
-
 	}
+	
 
+	
 	@Override
 	public boolean equals(Object obj) {
 		try {
@@ -71,7 +69,7 @@ public class Carta {
 	}
 
 	public void setCantAtributos(int cantAtributos) {
-		this.cantAtributos = cantAtributos;
+		Carta.cantAtributos = cantAtributos;
 	}
 
 }

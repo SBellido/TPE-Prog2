@@ -14,21 +14,29 @@ public class Jugador {
 	}
 
 	public Carta seleccionarCarta() {
-		Carta carta = null;
-		if (this.cartas != null) {
-			carta = this.cartas.getCarta();
+		if (this.cartas != null || (!this.cartas.estaVacio())) {
+			return this.cartas.getCarta();
 		}
-		return carta;
+		return null;
 	}
 
+	public void ganar(Carta cartaPerdedora) {
+		this.gana();
+		this.cartas.agregarCarta(cartaPerdedora);
+	}
+	public void perder(Carta cartaPerdedora) {
+		this.pierde();
+		this.cartas.eliminarCarta(cartaPerdedora);
+	}
+	
 	public Atributo elegirAtributo(Carta carta, int cantAtributo) {
-		int atributoRandom = (int) (Math.random() * cantAtributo) + 1;
-		Atributo atributo = carta.buscarAtributo(atributoRandom);
+		int atributoRandom = (int) (Math.random() * cantAtributo - 1);
+		Atributo atributo = carta.buscarAtributoPorIndice(atributoRandom);
 		return atributo;
 	}
 
 	public int contarCartas() {
-		return this.cartas.getCantidad();
+		return this.cartas.getCantMazoCompleto();
 	}
 
 	public void agarrarCartas(MazoCartas mazo) {
@@ -38,7 +46,10 @@ public class Jugador {
 	public void gana() {
 		this.setEsGanador(true);
 	}
-
+	public void pierde() {
+		this.setEsGanador(false);
+	
+	}
 	@Override
 	public boolean equals(Object obj) {
 		try {

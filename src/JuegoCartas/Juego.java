@@ -16,39 +16,61 @@ public class Juego {
 
 	public Jugador asignarTurno() {
 		Jugador ganador;
-		if (!this.jugadorA.esGanador() && this.jugadorB.esGanador()) {
-			ganador = this.jugadorA;
-		} else if (this.jugadorA.esGanador()) {
+		if (this.jugadorA.esGanador() && (!this.jugadorB.esGanador())) {
 			ganador = this.jugadorA;
 			this.jugadorB.setEsGanador(false);
 			this.setPerdedorRonda(jugadorB);
-		} else {
+		} else if (this.jugadorB.esGanador() && (!this.jugadorA.esGanador())) {
 			ganador = this.jugadorB;
 			this.jugadorA.setEsGanador(false);
 			this.setPerdedorRonda(jugadorA);
+		} else {
+			ganador = this.jugadorA;
+			this.setPerdedorRonda(jugadorB);
 		}
 		return ganador;
 	}
 
 	public void jugar() {
-		for (int ronda = 0; ronda < this.maxRondas; ronda++) {
+		for (int ronda = 1; ronda < this.maxRondas; ronda++) {
 			Jugador jugadorTurno = asignarTurno();
 			Carta cartaTurno = jugadorTurno.seleccionarCarta();
 			Jugador jugadorSinTurno = this.getPerdedorRonda();
 			Carta cartaSinTurno = jugadorSinTurno.seleccionarCarta();
 			int cantAtributos = cartaTurno.getCantAtributos();
-			Atributo atributoElegido = jugadorTurno.elegirAtributo(cartaTurno, cantAtributos);
-			cartaTurno.compararAtributos(cartaSinTurno, atributoElegido);
-
+			Atributo atributoElegido = jugadorTurno.elegirAtributo(cartaTurno, cantAtributos);			
+			System.out.println("Artibuto Elegido: " + atributoElegido);		
+			System.out.println(jugadorTurno);
+			System.out.println(cartaTurno);
+			System.out.println(jugadorSinTurno);
+			System.out.println(cartaSinTurno);		
+			System.out.println("-------------------------------------------");
+			this.asignarResultadoRonda(jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno ,cartaSinTurno);		
+			System.out.println("-------------------\nRonda número: " + ronda);
+			
 			if (this.finDeJuego()) {
 				ronda = this.maxRondas;
-			}
-			if (cartaA.esGanadora(cartaB, 0)) {
-				this.jugadorA.gana();
-			}
+				System.out.println("FIN DE JUEGO");
+			}		
 		}
 	}
 
+	public void asignarResultadoRonda(Jugador jugadorTurno, Jugador jugadorSinTurno, Atributo atributoElegido, Carta cartaTurno, Carta cartaSinTurno) {
+		if(cartaSinTurno.esGanadora(atributoElegido)) {
+			jugadorSinTurno.ganar(cartaTurno);
+			jugadorTurno.perder(cartaTurno);
+			jugadorSinTurno = this.asignarTurno();
+			jugadorTurno = this.getPerdedorRonda();			
+			System.out.println("\nCARTA GANADORA" + cartaSinTurno);
+		} else {
+			jugadorTurno.ganar(cartaSinTurno);
+			jugadorSinTurno.perder(cartaSinTurno);
+			jugadorTurno = this.asignarTurno();
+			jugadorSinTurno = this.getPerdedorRonda();			
+			System.out.println("\nCARTA GANADORA" + cartaTurno);
+		}
+	}
+	
 	public boolean finDeJuego() {
 		return (this.jugadorA.contarCartas() == 0 || this.jugadorB.contarCartas() == 0);
 	}
