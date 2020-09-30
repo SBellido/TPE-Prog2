@@ -16,29 +16,29 @@ public class MainJuegoCartas {
 		Carta carta4 = new Carta("A 4");
 		Carta cartaFalsa = new Carta("A 5");
 
-		Atributo atributoAlturaFlash = new Atributo("Altura", 1.95);
+		Atributo atributoAlturaFlash = new Atributo("Altura", 1.93);
 		Atributo atributoPesoFlash = new Atributo("Peso", 90.0);
 		Atributo atributoFuerzaFlash = new Atributo("Fuerza", 840.0);
 		Atributo atributoPeleasGanadasFlash = new Atributo("Peleas ganadas", 900.0);
 		Atributo atributoVelociadFlash = new Atributo("Velocidad", 800000.0);
 		
 		
-		Atributo atributoAlturaSuperman = new Atributo("Altura", 2.05);
-		Atributo atributoPesoSuperman = new Atributo("Peso", 110.0);
+		Atributo atributoAlturaSuperman = new Atributo("Altura", 1.93);
+		Atributo atributoPesoSuperman = new Atributo("Peso", 90.0);
 		Atributo atributoFuerzaSuperman = new Atributo("Fuerza", 2000.0);
 		Atributo atributoPeleasGanadasSuperman = new Atributo("Peleas ganadas", 990.0);
 		Atributo atributoVelociadSuperman = new Atributo("Velocidad", 400.0);
 		
 		
-		Atributo atributoAlturaFireStorm = new Atributo("Altura", 1.75);
-		Atributo atributoPesoFireStorm = new Atributo("Peso", 70.0);
+		Atributo atributoAlturaFireStorm = new Atributo("Altura", 1.93);
+		Atributo atributoPesoFireStorm = new Atributo("Peso", 90.0);
 		Atributo atributoFuerzaFireStorm = new Atributo("Fuerza", 700.0);
 		Atributo atributoPeleasGanadasFireStorm = new Atributo("Peleas ganadas", 615.0);
 		Atributo atributoVelociadFireStorm = new Atributo("Velocidad", 50.0);
 		
 		
 		Atributo atributoAlturaManHunter = new Atributo("Altura", 1.93);
-		Atributo atributoPesoManHunter = new Atributo("Peso", 100.0);
+		Atributo atributoPesoManHunter = new Atributo("Peso", 90.0);
 		Atributo atributoFuerzaManHunter = new Atributo("Fuerza", 500.0);
 		Atributo atributoPeleasGanadasManHunter = new Atributo("Peleas ganadas", 25.0);
 		Atributo atributoVelociadManHunter = new Atributo("Velocidad", 220.0);

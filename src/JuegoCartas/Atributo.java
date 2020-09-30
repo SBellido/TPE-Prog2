@@ -10,10 +10,12 @@ public class Atributo {
 		this.valor = valor;
 	}
 
-	public boolean esGanador(double atributoValor) {		
-		return this.valor > atributoValor;
+	public boolean esGanador(Atributo atributoValor) {
+		return this.valor > atributoValor.getValor();
 	}
-
+	public boolean esEmpate(Atributo atributoValor) {
+		return this.valor == atributoValor.getValor();
+	}
 	@Override
 	public boolean equals(Object obj) {
 		try {

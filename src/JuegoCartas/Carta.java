@@ -24,12 +24,15 @@ public class Carta {
 	public boolean compararAtributo(Carta cartaComparada) {
 		int count = 0;
 		int cantAtributos = this.contarAtributos();
-		for (Atributo atributo : this.atributos) {
-			if (cartaComparada.tieneAtributo(atributo)) {
-				count++;				
+		if (cartaComparada.contarAtributos() == this.atributos.size()) {
+			for (Atributo atributo : this.atributos) {
+				if (cartaComparada.tieneAtributo(atributo)) {
+					count++;				
+				}
 			}
+			return count == cantAtributos;			
 		}
-		return count == cantAtributos;
+		return false;
 	}
 	
 	public void agregarAtributo(Atributo atributo) {
@@ -43,15 +46,26 @@ public class Carta {
 	}
 	
 	public boolean esGanadora(Atributo atributoElegido) {
-		double atributoValor = atributoElegido.getValor();
+		Atributo mismoAtributo = this.buscarAtributo(atributoElegido);
+			return mismoAtributo.esGanador(atributoElegido);
+	}	
+	
+// DEVOLVER UN ENTERO, 1 SI GANA, -1 SI PIERDE, 0 SI ES EMPATE
+	public Atributo buscarAtributo(Atributo atributoElegido) {
+		Atributo mismoAtributo = null;
 		for (Atributo atributo : this.atributos) {
 			if (atributo.equals(atributoElegido)) {
-				return atributo.esGanador(atributoValor);
+				mismoAtributo = atributo;
+				return mismoAtributo;
 			}
 		}
-		return false;
+		return mismoAtributo;
 	}
-
+	
+	public boolean esEmpate(Atributo atributoElegido) {
+		Atributo mismoAtributo = this.buscarAtributo(atributoElegido);
+			return mismoAtributo.esEmpate(atributoElegido);
+	}
 	
 	@Override
 	public boolean equals(Object obj) {

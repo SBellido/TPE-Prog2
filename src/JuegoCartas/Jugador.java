@@ -22,11 +22,11 @@ public class Jugador {
 	}
 
 	public void ganar(Carta cartaPerdedora) {
-		this.gana();
+		this.setEsGanador(true);
 		this.cartas.agregarCarta(cartaPerdedora);
 	}
 	public void perder(Carta cartaPerdedora) {
-		this.pierde();
+		this.setEsGanador(false);
 		this.cartas.eliminarCarta(cartaPerdedora);
 	}
 	
@@ -45,13 +45,6 @@ public class Jugador {
 		this.cartas.agregarCarta(carta);
 	}
 
-	public void gana() {
-		this.setEsGanador(true);
-	}
-	public void pierde() {
-		this.setEsGanador(false);
-	
-	}
 	@Override
 	public boolean equals(Object obj) {
 		try {
