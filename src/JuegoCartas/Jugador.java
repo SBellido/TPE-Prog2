@@ -11,11 +11,12 @@ public class Jugador {
 		this.nombre = nombre;
 		this.numbreId = id++;
 		this.esGanador = false;
+		this.cartas = new MazoCartas();
 	}
 
 	public Carta seleccionarCarta() {
 		if (this.cartas != null || (!this.cartas.estaVacio())) {
-			return this.cartas.getCarta();
+			return this.cartas.verCarta();
 		}
 		return null;
 	}
@@ -29,7 +30,8 @@ public class Jugador {
 		this.cartas.eliminarCarta(cartaPerdedora);
 	}
 	
-	public Atributo elegirAtributo(Carta carta, int cantAtributo) {
+	public Atributo elegirAtributo(Carta carta) { 
+		int cantAtributo = carta.contarAtributos();
 		int atributoRandom = (int) (Math.random() * cantAtributo - 1);
 		Atributo atributo = carta.buscarAtributoPorIndice(atributoRandom);
 		return atributo;
@@ -39,8 +41,8 @@ public class Jugador {
 		return this.cartas.getCantMazoCompleto();
 	}
 
-	public void agarrarCartas(MazoCartas mazo) {
-		this.setCartas(mazo);
+	public void agarrarCarta(Carta carta) {
+		this.cartas.agregarCarta(carta);
 	}
 
 	public void gana() {

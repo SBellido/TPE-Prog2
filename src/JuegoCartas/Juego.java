@@ -37,8 +37,7 @@ public class Juego {
 			Carta cartaTurno = jugadorTurno.seleccionarCarta();
 			Jugador jugadorSinTurno = this.getPerdedorRonda();
 			Carta cartaSinTurno = jugadorSinTurno.seleccionarCarta();
-			int cantAtributos = cartaTurno.getCantAtributos();
-			Atributo atributoElegido = jugadorTurno.elegirAtributo(cartaTurno, cantAtributos);			
+			Atributo atributoElegido = jugadorTurno.elegirAtributo(cartaTurno);			
 			System.out.println("Artibuto Elegido: " + atributoElegido);		
 			System.out.println(jugadorTurno);
 			System.out.println(cartaTurno);
@@ -46,8 +45,7 @@ public class Juego {
 			System.out.println(cartaSinTurno);		
 			System.out.println("-------------------------------------------");
 			this.asignarResultadoRonda(jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno ,cartaSinTurno);		
-			System.out.println("-------------------\nRonda número: " + ronda);
-			
+			System.out.println("-------------------\nRonda número: " + ronda);		
 			if (this.finDeJuego()) {
 				ronda = this.maxRondas;
 				System.out.println("FIN DE JUEGO");
@@ -55,6 +53,7 @@ public class Juego {
 		}
 	}
 
+	
 	public void asignarResultadoRonda(Jugador jugadorTurno, Jugador jugadorSinTurno, Atributo atributoElegido, Carta cartaTurno, Carta cartaSinTurno) {
 		if(cartaSinTurno.esGanadora(atributoElegido)) {
 			jugadorSinTurno.ganar(cartaTurno);

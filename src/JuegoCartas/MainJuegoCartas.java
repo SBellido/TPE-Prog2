@@ -6,7 +6,7 @@ public class MainJuegoCartas {
 
 // INSTANCIAS
 		
-		MazoCartas mazo = new MazoCartas(4);
+		MazoCartas mazo = new MazoCartas();
 		Jugador jugadorA = new Jugador("A");
 		Jugador jugadorB = new Jugador("B");
 		Juego juego = new Juego(40, mazo, jugadorA, jugadorB);	
@@ -14,7 +14,8 @@ public class MainJuegoCartas {
 		Carta carta2 = new Carta("A 2");
 		Carta carta3 = new Carta("A 3");
 		Carta carta4 = new Carta("A 4");
-		
+		Carta cartaFalsa = new Carta("A 5");
+
 		Atributo atributoAlturaFlash = new Atributo("Altura", 1.95);
 		Atributo atributoPesoFlash = new Atributo("Peso", 90.0);
 		Atributo atributoFuerzaFlash = new Atributo("Fuerza", 840.0);
@@ -41,6 +42,17 @@ public class MainJuegoCartas {
 		Atributo atributoFuerzaManHunter = new Atributo("Fuerza", 500.0);
 		Atributo atributoPeleasGanadasManHunter = new Atributo("Peleas ganadas", 25.0);
 		Atributo atributoVelociadManHunter = new Atributo("Velocidad", 220.0);
+		
+		
+		Atributo atributoAlturaCartaFalsa = new Atributo("Revolución por minuto", 2.05);
+		Atributo atributoPesoCartaFalsa = new Atributo("Velocidad", 110.0);
+		Atributo atributoFuerzaCartaFalsa = new Atributo("Vuelo máximo", 2000.0);
+		Atributo atributoPeleasGanadasCartaFalsa = new Atributo("Cantidad de asientos", 990.0);
+		
+		cartaFalsa.agregarAtributo(atributoPesoCartaFalsa);
+		cartaFalsa.agregarAtributo(atributoPeleasGanadasCartaFalsa);
+		cartaFalsa.agregarAtributo(atributoFuerzaCartaFalsa);
+		cartaFalsa.agregarAtributo(atributoAlturaCartaFalsa);
 		
 		carta1.agregarAtributo(atributoAlturaSuperman);
 		carta1.agregarAtributo(atributoPesoSuperman);
@@ -70,8 +82,11 @@ public class MainJuegoCartas {
 		mazo.agregarCarta(carta4);
 		mazo.agregarCarta(carta1);
 		mazo.agregarCarta(carta2);
-		mazo.repartirCartas(jugadorA, jugadorB);
+		mazo.agregarCarta(cartaFalsa);
 
+//		System.out.println(mazo);
+		mazo.repartirCartas(jugadorA, jugadorB);
+		
 		juego.jugar();
 
 // IMPRIME POR CONSOLA

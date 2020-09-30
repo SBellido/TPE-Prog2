@@ -5,8 +5,7 @@ import java.util.List;
 
 public class Carta {
 	private String id;
-	List<Atributo> atributos;
-	private static int cantAtributos = 5;
+	private List<Atributo> atributos;
 
 	public Carta(String id) {
 		this.id = id;
@@ -22,12 +21,27 @@ public class Carta {
 		return atributoElegido;
 	}
 
+	public boolean compararAtributo(Carta cartaComparada) {
+		int count = 0;
+		int cantAtributos = this.contarAtributos();
+		for (Atributo atributo : this.atributos) {
+			if (cartaComparada.tieneAtributo(atributo)) {
+				count++;				
+			}
+		}
+		return count == cantAtributos;
+	}
+	
 	public void agregarAtributo(Atributo atributo) {
 		if (!tieneAtributo(atributo)) {
 			this.atributos.add(atributo);
 		}
 	}
-
+	
+	public int contarAtributos() {
+		return this.atributos.size();
+	}
+	
 	public boolean esGanadora(Atributo atributoElegido) {
 		double atributoValor = atributoElegido.getValor();
 		for (Atributo atributo : this.atributos) {
@@ -37,7 +51,6 @@ public class Carta {
 		}
 		return false;
 	}
-	
 
 	
 	@Override
@@ -62,14 +75,6 @@ public class Carta {
 
 	public List<Atributo> getAtributos() {
 		return new ArrayList<>(this.atributos);
-	}
-
-	public int getCantAtributos() {
-		return cantAtributos;
-	}
-
-	public void setCantAtributos(int cantAtributos) {
-		Carta.cantAtributos = cantAtributos;
 	}
 
 }
