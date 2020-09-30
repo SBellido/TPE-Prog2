@@ -48,8 +48,8 @@ public class Juego {
 			this.asignarResultadoRonda(jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno ,cartaSinTurno);		
 			System.out.println("-------------------\nRonda número: " + ronda);		
 			ronda++;
-			System.out.println("FIN DE JUEGO");	
 		}
+		System.out.println("FIN DE JUEGO");	
 	}
 
 	
