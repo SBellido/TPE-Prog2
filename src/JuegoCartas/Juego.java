@@ -32,7 +32,8 @@ public class Juego {
 	}
 
 	public void jugar() {
-		for (int ronda = 1; ronda < this.maxRondas; ronda++) {
+		int ronda = 0;
+		while (!this.finDeJuego(ronda)) {
 			Jugador jugadorTurno = asignarTurno();
 			Carta cartaTurno = jugadorTurno.seleccionarCarta();
 			Jugador jugadorSinTurno = this.getPerdedorRonda();
@@ -46,10 +47,8 @@ public class Juego {
 			System.out.println("-------------------------------------------");
 			this.asignarResultadoRonda(jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno ,cartaSinTurno);		
 			System.out.println("-------------------\nRonda número: " + ronda);		
-			if (this.finDeJuego()) {
-				ronda = this.maxRondas;
-				System.out.println("FIN DE JUEGO");
-			}		
+			ronda++;
+			System.out.println("FIN DE JUEGO");	
 		}
 	}
 
@@ -70,8 +69,10 @@ public class Juego {
 		}
 	}
 	
-	public boolean finDeJuego() {
-		return (this.jugadorA.contarCartas() == 0 || this.jugadorB.contarCartas() == 0);
+	public boolean finDeJuego(int ronda) {
+		return (this.jugadorA.contarCartas() == 0 || 
+				this.jugadorB.contarCartas() == 0 ||
+				ronda == this.maxRondas);
 	}
 
 // GETTERS & SETTERS
