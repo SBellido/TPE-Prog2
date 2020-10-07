@@ -71,7 +71,6 @@ public class VisorMazo {
             e.printStackTrace();
             return null;
         }
-        return mazo;
     }
 
    
