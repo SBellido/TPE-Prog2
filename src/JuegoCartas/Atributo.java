@@ -1,6 +1,6 @@
 package JuegoCartas;
 
-public class Atributo {	
+public class Atributo implements Comparable<Atributo>{	
 	private String nombre;
 	private double valor;
 	
@@ -9,13 +9,18 @@ public class Atributo {
 		this.nombre = nombre;
 		this.valor = valor;
 	}
-
-	public boolean esGanador(Atributo atributoValor) {
-		return this.valor > atributoValor.getValor();
+	
+	@Override
+	public int compareTo(Atributo atributo) {
+		int result = 0;
+		if (this.valor > atributo.getValor()) {
+			result = 1;	
+		} else if (this.valor < atributo.getValor()) {
+			result = -1;
+		}
+		return result;
 	}
-	public boolean esEmpate(Atributo atributoValor) {
-		return this.valor == atributoValor.getValor();
-	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		try {

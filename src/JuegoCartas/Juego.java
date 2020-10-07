@@ -55,11 +55,11 @@ public class Juego {
 
 	public void asignarResultadoRonda(Jugador jugadorTurno, Jugador jugadorSinTurno, Atributo atributoElegido,
 			Carta cartaTurno, Carta cartaSinTurno) {
-		if (cartaSinTurno.esEmpate(atributoElegido)) {
+		if (cartaSinTurno.esGanadora(atributoElegido) == 0) {
 			jugadorTurno.agarrarCarta(cartaTurno);
 			jugadorSinTurno.agarrarCarta(cartaSinTurno);
 			System.out.println("\nEMPATE");
-		} else if (cartaSinTurno.esGanadora(atributoElegido)) {
+		} else if (cartaSinTurno.esGanadora(atributoElegido) > 0) {
 			jugadorSinTurno.ganar(cartaTurno);
 			jugadorTurno.perder(cartaTurno);
 			jugadorSinTurno = this.asignarTurno();
