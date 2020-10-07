@@ -1,3 +1,5 @@
+package JuegoCartas;
+
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -36,11 +38,43 @@ public class VisorMazo {
             e.printStackTrace();
         }
     }
+    public static MazoCartas cargarMazo(String jsonFile) {
+        //URL url = getClass().getResource(jsonFile);
+		MazoCartas mazo = new MazoCartas();
 
-    public static void main(String[] args) {
-        String mazoPath = "./superheroes.json";
-        VisorMazo.mostrarMazo(mazoPath);
+        File jsonInputFile = new File(jsonFile);
+        InputStream is;
+        try {
+            is = new FileInputStream(jsonInputFile);
+            // Creo el objeto JsonReader de Json.
+            JsonReader reader = Json.createReader(is);
+            // Obtenemos el JsonObject a partir del JsonReader.
+            JsonArray cartas = (JsonArray) reader.readObject().getJsonArray("cartas");
+            for (JsonObject carta : cartas.getValuesAs(JsonObject.class)) {
+                String nombreCarta = carta.getString("nombre");
+                Carta cartaNueva = new Carta(nombreCarta);
+                JsonObject atributos = (JsonObject) carta.getJsonObject("atributos");
+                for  (String nombreAtributo:atributos.keySet()) {
+                	int valorAtributo =  atributos.getInt(nombreAtributo);
+                	Atributo nuevoAtributo = new Atributo(nombreAtributo, valorAtributo);
+                	cartaNueva.agregarAtributo(nuevoAtributo);
+                	
+                }
+             mazo.agregarCarta(cartaNueva);
+            }
+
+            reader.close();
+            return mazo;
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        return mazo;
     }
+
+   
 
 }
 

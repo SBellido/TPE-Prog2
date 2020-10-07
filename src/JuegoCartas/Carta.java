@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Carta {
+	private String nombre;
 	private String id;
 	private List<Atributo> atributos;
 
-	public Carta(String id) {
+	public Carta(String nombre) {
+		this.nombre = nombre;
+		this.atributos = new ArrayList<>();
+	}
+	public Carta(String nombre, String id) {
 		this.id = id;
 		this.atributos = new ArrayList<>();
 	}
@@ -67,7 +72,7 @@ public class Carta {
 	public boolean equals(Object obj) {
 		try {
 			Carta aux = (Carta) obj;
-			return this.getId().equals(aux.getId());
+			return this.getNombre().equals(aux.getNombre());
 		} catch (Exception e) {
 			return false;
 		}
@@ -86,5 +91,9 @@ public class Carta {
 	public List<Atributo> getAtributos() {
 		return new ArrayList<>(this.atributos);
 	}
+	public String getNombre() {
+		return nombre;
+	}
 
+	
 }
