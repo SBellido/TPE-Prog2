@@ -34,7 +34,8 @@ public class Juego {
 
 	public void jugar() {
 		int ronda = 0;
-		while (!this.finDeJuego(ronda)) {
+		mazo.repartirCartas(jugadorA, jugadorB);
+		while (!this.finDeJuego(ronda)) {		
 			Jugador jugadorTurno = asignarTurno();
 			Carta cartaTurno = jugadorTurno.seleccionarCarta();
 			Jugador jugadorSinTurno = this.getPerdedorRonda();
