@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/braia/eclipse-workspace/TPE-Prog2/src/JuegoCartas/lib/javax.json-1.1.4.jar"/>
+	<classpathentry kind="lib" path="D:/Prog2/TPE-Prog2/src/JuegoCartas/lib/javax.json-1.1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

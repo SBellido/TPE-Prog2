@@ -6,12 +6,17 @@ public class Jugador {
 	private String nombre;
 	private MazoCartas cartas;
 	private boolean esGanador;
-
+	private Estrategia estrategia;
+	
 	public Jugador(String nombre) {
+		this.nombre = nombre;
+	}
+	public Jugador(String nombre, Estrategia estrategia) {
 		this.nombre = nombre;
 		this.numbreId = id++;
 		this.esGanador = false;
 		this.cartas = new MazoCartas();
+		this.estrategia = estrategia;
 	}
 
 	public Carta seleccionarCarta() {
@@ -21,20 +26,21 @@ public class Jugador {
 		return null;
 	}
 
-	public void ganar(Carta cartaPerdedora) {
+	public void ganar(Carta perdedora, Carta ganadora) {
 		this.setEsGanador(true);
-		this.cartas.agregarCarta(cartaPerdedora);
+		this.cartas.agregarCarta(perdedora);
+		this.cartas.eliminarCarta(ganadora);
+		this.cartas.agregarCarta(ganadora);
 	}
+	
 	public void perder(Carta cartaPerdedora) {
 		this.setEsGanador(false);
 		this.cartas.eliminarCarta(cartaPerdedora);
 	}
 	
 	public Atributo elegirAtributo(Carta carta) { 
-		int cantAtributo = carta.contarAtributos();
-		int atributoRandom = (int) (Math.random() * cantAtributo - 1);
-		Atributo atributo = carta.buscarAtributoPorIndice(atributoRandom);
-		return atributo;
+		Atributo atributoElegido = this.estrategia.elegirAtributo(carta);	
+		return atributoElegido;
 	}
 
 	public int contarCartas() {
@@ -88,6 +94,10 @@ public class Jugador {
 
 	public void setEsGanador(boolean esGanador) {
 		this.esGanador = esGanador;
+	}
+	
+	public void setEstrategia(Estrategia estrategia) {
+		this.estrategia = estrategia;
 	}
 
 }

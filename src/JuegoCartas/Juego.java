@@ -34,60 +34,77 @@ public class Juego {
 	}
 
 	public void jugar() {
-		int ronda = 1;
+		int ronda = 0;
 		mazo.repartirCartas(jugadorA, jugadorB);
-		while (!this.finDeJuego(ronda)) {
+		
+		while (!this.finDeJuego(ronda)) {	
+			
 			Jugador jugadorTurno = asignarTurno();
 			Carta cartaTurno = jugadorTurno.seleccionarCarta();
+			Atributo atributoElegido = jugadorTurno.elegirAtributo(cartaTurno);			
+			
 			Jugador jugadorSinTurno = this.getPerdedorRonda();
 			Carta cartaSinTurno = jugadorSinTurno.seleccionarCarta();
-			Atributo atributoElegido = jugadorTurno.elegirAtributo(cartaTurno);
-			this.asignarResultadoRonda(ronda, jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno,
-					cartaSinTurno);
+			
+			this.asignarResultadoRonda(ronda, jugadorTurno, jugadorSinTurno, 
+					atributoElegido, cartaTurno, cartaSinTurno);
 			ronda++;
+			System.out.println("\n" + ronda);
 		}
-	}
-
+	}	
+	
 	public void asignarResultadoRonda(int ronda, Jugador jugadorTurno, Jugador jugadorSinTurno,
 			Atributo atributoElegido, Carta cartaTurno, Carta cartaSinTurno) {
-		if (cartaSinTurno.esGanadora(atributoElegido) == 0) {
+		
+		if (cartaSinTurno.esGanadora(cartaTurno, atributoElegido) == 0) {
 			jugadorTurno.agarrarCarta(cartaTurno);
 			jugadorSinTurno.agarrarCarta(cartaSinTurno);
 			Jugador ganador = new Jugador(" ninguno ");
 			Jugador perdedor = new Jugador(" ninguno ");
-			this.historial.guardarHistorialRonda(ronda, ganador, perdedor, jugadorTurno, jugadorSinTurno,
-					atributoElegido, cartaTurno, cartaSinTurno);
-		} else if (cartaSinTurno.esGanadora(atributoElegido) > 0) {
-			jugadorSinTurno.ganar(cartaTurno);
+			
+			this.historial.guardarHistorialRonda(ronda, ganador, perdedor, 
+					jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno, cartaSinTurno);
+			
+		} else if (cartaSinTurno.esGanadora(cartaTurno, atributoElegido) > 0) {
+			double valorCartaTurno = cartaTurno.obtenerValorconPocima(atributoElegido);
+			
+			jugadorSinTurno.ganar(cartaTurno, cartaSinTurno);
 			jugadorTurno.perder(cartaTurno);
 			Jugador ganador = jugadorSinTurno;
 			Jugador perdedor = jugadorTurno;
 			jugadorSinTurno = this.asignarTurno();
 			jugadorTurno = this.getPerdedorRonda();
-			this.historial.guardarHistorialRonda(ronda, ganador, perdedor, jugadorTurno, jugadorSinTurno,
-					atributoElegido, cartaSinTurno, cartaTurno);
+			
+			this.historial.guardarHistorialRonda(ronda, ganador, perdedor, 
+					jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno, cartaSinTurno);
 		} else {
-			jugadorTurno.ganar(cartaSinTurno);
+			jugadorTurno.ganar(cartaSinTurno, cartaTurno);
 			jugadorSinTurno.perder(cartaSinTurno);
 			Jugador ganador = jugadorTurno;
 			Jugador perdedor = jugadorSinTurno;
 			jugadorTurno = this.asignarTurno();
 			jugadorSinTurno = this.getPerdedorRonda();
-			this.historial.guardarHistorialRonda(ronda, ganador, perdedor, jugadorTurno, jugadorSinTurno,
-					atributoElegido, cartaTurno, cartaSinTurno);
+			
+			this.historial.guardarHistorialRonda(ronda, ganador, perdedor, 
+					jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno, cartaSinTurno);
 		}
 	}
 
+	
 	public boolean finDeJuego(int ronda) {
-		return (this.jugadorA.contarCartas() == 0 || this.jugadorB.contarCartas() == 0 || ronda == this.maxRondas);
+		return (this.jugadorA.contarCartas() == 0 || 
+				this.jugadorB.contarCartas() == 0 || 
+				ronda == this.maxRondas);
 	}
 
 // GETTERS & SETTERS
 
 	@Override
 	public String toString() {
-		return "\nJUEGO" + "\nMáximo de rondas: " + this.getMaxRondas() + "\nJugador A: " + this.getJugadorA()
-				+ "\nJugador B: " + this.getJugadorB();
+		return "\nJUEGO" + 
+				"\nMáximo de rondas: " + this.getMaxRondas() + 
+				"\nJugador A: " + this.getJugadorA() + 
+				"\nJugador B: " + this.getJugadorB();
 	}
 
 	// GETTERS & SETTERS

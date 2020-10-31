@@ -1,6 +1,6 @@
 package JuegoCartas;
 
-public class MainJuegoCartas {
+public class Ver {
 
 	public static void main(String[] args) {
 		
@@ -9,8 +9,8 @@ public class MainJuegoCartas {
 		VisorMazo.mostrarMazo(mazoPath);
 		
 		
-//		INSTANCIA MAZO CON LOS DATOS PRECARGADOS	
-		MazoCartas mazo = VisorMazo.cargarMazo(mazoPath);
+//		INSTANCIA MAZO	
+		MazoCartas mazo = new MazoCartas();
 		
 		
 //		INSTANCIA PÓCIMAS
@@ -35,7 +35,7 @@ public class MainJuegoCartas {
 		
 //		INSTANCIA ESTRATEGIAS
 		EstrategiaTimbero timbero = new EstrategiaTimbero();
-		EstrategiaObstinado obstinado = new EstrategiaObstinado("velocidad"); 		
+		EstrategiaObstinado obstinado = new EstrategiaObstinado("Velocidad"); 		
 		EstrategiaAmbicioso ambiocioso = new EstrategiaAmbicioso(); 
 		
 
