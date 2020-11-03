@@ -12,9 +12,14 @@ public class Pocima extends ElementoPocima {
 	public double incorporarAditivo(Atributo atributo) {
 		return atributo.getValor() + (atributo.getValor() * this.porcentaje);
 	}
+
 	
 	public double getPorcentaje() {
 		return this.porcentaje;
 	}
+	public void setPorcentaje(double porcentaje) {
+		this.porcentaje = porcentaje;
+	}
+
 
 }

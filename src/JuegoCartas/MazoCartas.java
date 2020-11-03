@@ -7,24 +7,19 @@ import java.util.List;
 
 public class MazoCartas {
 	private final static int PRIMERACARTA = 0;
-	private final static int MAX = 100;
-	private final static int MED = 50;
-	private final static int MIN = 1;
+	private final int MAX = 100;
+	private final int MED = 50;
+	private final int MIN = 1;
  	private List<Carta> mazo;
 	private List<ElementoPocima> pocimas;
-
 	
-	public MazoCartas(List<Carta> mazo, List<ElementoPocima> pocimas) {
-		this.mazo = mazo;
-		this.pocimas = pocimas;
-	}
 	public MazoCartas() {
 		this.mazo = new ArrayList<>();
 		this.pocimas = new ArrayList<>();
 	}
 
 	public Carta verCarta() {
-		return this.mazo.get(PRIMERACARTA);
+		return this.mazo.get(MazoCartas.PRIMERACARTA);
 	}
 
 	public boolean verificarCarta(Carta cartaNueva) {
@@ -34,7 +29,7 @@ public class MazoCartas {
 	}
 
 	public Carta darCarta() {
-		return this.mazo.remove(PRIMERACARTA);
+		return this.mazo.remove(MazoCartas.PRIMERACARTA);
 	}
 
 	public boolean contieneCarta(Carta carta) {
@@ -94,10 +89,6 @@ public class MazoCartas {
 		return result;
 	}
 
-	public MazoCartas copiarse() {
-		MazoCartas copia = new MazoCartas(this.mazo, this.pocimas);
-		return copia;
-	}
 	
 	@Override
 	public String toString() {

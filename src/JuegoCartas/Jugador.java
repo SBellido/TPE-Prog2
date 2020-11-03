@@ -8,11 +8,6 @@ public class Jugador {
 	private boolean esGanador;
 	private Estrategia estrategia;
 	
-	public Jugador(String nombre, MazoCartas cartas) {
-		this.nombre = nombre;
-		this.cartas = cartas;
-		
-	}
 	public Jugador(String nombre, Estrategia estrategia) {
 		this.nombre = nombre;
 		this.numeroId = id++;
@@ -74,24 +69,20 @@ public class Jugador {
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 	public int getNumeroId() {
 		return numeroId;
 	}
 	public boolean esGanador() {
 		return this.esGanador;
 	}
-	public void setEsGanador(boolean esGanador) {
-		this.esGanador = esGanador;
-	}	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 	public void setEstrategia(Estrategia estrategia) {
 		this.estrategia = estrategia;
 	}
-	public MazoCartas getCopiaCartas() {	
-		MazoCartas cartasCopia = this.cartas.copiarse();
-		return cartasCopia;
+	public void setEsGanador(boolean esGanador) {
+		this.esGanador = esGanador;
 	}
 
 }

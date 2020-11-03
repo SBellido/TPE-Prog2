@@ -12,7 +12,7 @@ public class Historial {
 
 
 	public void guardarHistorialRonda(int ronda, Jugador ganador, Jugador perdedor, Jugador jugadorTurno,
-			Jugador JugadorSinTurno, Atributo atributoElegido, Carta cartaTurno, Carta cartaSinTurno,
+			Jugador jugadorSinTurno, Atributo atributoElegido, Carta cartaTurno, Carta cartaSinTurno,
 			double valorCartaTurnoConPocima, double valorCartaSinTurnoConPocima) {
 
 		Atributo atributoSinTurno = cartaSinTurno.buscarAtributo(atributoElegido);
@@ -20,7 +20,7 @@ public class Historial {
 		double valorAtributoCartaTurno = atributoElegido.getValor();
 		
 		String nombreJugTurno = jugadorTurno.getNombre();
-		String nombreJugSinTurno = JugadorSinTurno.getNombre();
+		String nombreJugSinTurno = jugadorSinTurno.getNombre();
 		
 		String nombreAtributo = atributoElegido.getNombre();
 		String nombreSuperHeroeTurno = cartaTurno.getNombre();
@@ -80,8 +80,6 @@ public class Historial {
 			System.out.println(data);
 	}
 
-	public List<Object> getDatosRonda() {
-		return new ArrayList<Object>(this.datosRonda);
-	}
+	
 
 }
