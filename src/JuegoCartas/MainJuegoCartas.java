@@ -14,7 +14,7 @@ public class MainJuegoCartas {
 		
 		
 //		INSTANCIA PÓCIMAS
-		PocimaNumeroMagico pocimaNumeroMagico = new PocimaNumeroMagico("Pócima Número Mágico", 4.0);
+		PocimaNumeroMagico pocimaNumeroMagico = new PocimaNumeroMagico("Pócima Número Mágico", 40);
 		PocimaDebilitadora pocimaKriptonita = new PocimaDebilitadora("Pócima Kriptonita", 0.2);
 		Pocima pocimaFortalecedora = new Pocima("Pócima Fortalecedora", 0.35);
 		PocimaAtributoSelectivo pocimaAtributoFuerza = new PocimaAtributoSelectivo("Pócima Atributo Selectivo fuerza", 5.0, "fuerza");

@@ -10,6 +10,7 @@ public class Historial {
 		this.datosRonda = new ArrayList<>();
 	}
 
+
 	public void guardarHistorialRonda(int ronda, Jugador ganador, Jugador perdedor, Jugador jugadorTurno,
 			Jugador JugadorSinTurno, Atributo atributoElegido, Carta cartaTurno, Carta cartaSinTurno,
 			double valorCartaTurnoConPocima, double valorCartaSinTurnoConPocima) {
@@ -34,29 +35,49 @@ public class Historial {
 		if (cartaSinTurno.tienePocima()) {
 			nombrePocimaSinTurno = cartaSinTurno.getPocima().getNombre();				
 		}
+		
+		if (ganador != null) {
+			int cantCartasGanador = ganador.contarCartas();
+			int cantCartasPerdedor = perdedor.contarCartas();
 			
-		int cantCartasGanador = ganador.contarCartas();
-		int cantCartasPerdedor = perdedor.contarCartas();
-		
-		String nombreGanador = ganador.getNombre();
-		String nombrePerdedor = perdedor.getNombre();
-		
+			String nombreGanador = ganador.getNombre();		
 
-		this.datosRonda.add("------- Ronda " + ronda + " -------\n");
-		this.datosRonda.add("El jugador " + nombreJugTurno + " selecciona competir por el atributo " + nombreAtributo + "\n");
-		this.datosRonda.add("La carta de " + nombreJugTurno + " es " + nombreSuperHeroeTurno + " con " + nombreAtributo
-				+ " " + valorAtributoCartaTurno + ", se aplicó la pócima "+ nombrePocimaTurno + " valor resultante " + valorCartaTurnoConPocima);
-		this.datosRonda.add("La carta de " + nombreJugSinTurno + " es " + nombreSuperHeroeSinTurno + " con "
-				+ nombreAtributo + " " + valorAtributoCartaSinTurno + ", se aplicó la pócima " + nombrePocimaSinTurno + " valor resultante " + valorCartaSinTurnoConPocima);
-		this.datosRonda.add("Gana la ronda " + nombreGanador + ".\n");
-		this.datosRonda.add(nombreJugTurno + " posee ahora " + cantCartasGanador + " cartas y " + nombreJugSinTurno
-				+ " posee ahora " + cantCartasPerdedor + " cartas.\n");
+			this.datosRonda.add("------- Ronda " + ronda + " -------\n");
+			
+			this.datosRonda.add("El jugador " + nombreJugTurno + " selecciona competir por el atributo " + nombreAtributo + "\n");
+			
+			this.datosRonda.add("La carta de " + nombreJugTurno + " es " + nombreSuperHeroeTurno + " con " + nombreAtributo
+					+ " " + valorAtributoCartaTurno + ", se aplicó la pócima "+ nombrePocimaTurno + " valor resultante " + valorCartaTurnoConPocima);
+			
+			this.datosRonda.add("La carta de " + nombreJugSinTurno + " es " + nombreSuperHeroeSinTurno + " con "
+					+ nombreAtributo + " " + valorAtributoCartaSinTurno + ", se aplicó la pócima " + nombrePocimaSinTurno + " valor resultante " + valorCartaSinTurnoConPocima);
+			
+					
+			
+			
+			this.datosRonda.add(nombreJugTurno + " posee ahora " + cantCartasGanador + " cartas y " + nombreJugSinTurno
+					+ " posee ahora " + cantCartasPerdedor + " cartas.\n");
+						
+		}
+		else  {
+			this.datosRonda.add("------- Ronda " + ronda + " -------\n");
+			this.datosRonda.add("\t EMPATE");	
+			
+			this.datosRonda.add("El jugador " + nombreJugTurno + " selecciona competir por el atributo " + nombreAtributo + "\n");
+			
+			this.datosRonda.add("La carta de " + nombreJugTurno + " es " + nombreSuperHeroeTurno + " con " + nombreAtributo
+					+ " " + valorAtributoCartaTurno + ", se aplicó la pócima "+ nombrePocimaTurno + " valor resultante " + valorCartaTurnoConPocima);
+			
+			this.datosRonda.add("La carta de " + nombreJugSinTurno + " es " + nombreSuperHeroeSinTurno + " con "
+					+ nombreAtributo + " " + valorAtributoCartaSinTurno + ", se aplicó la pócima " + nombrePocimaSinTurno + " valor resultante " + valorCartaSinTurnoConPocima + "\n");
+			
+		}
+		
 	}
 
 	public void imprimir() {
 		for (Object data : this.datosRonda)
 			System.out.println(data);
-
 	}
 
 	public List<Object> getDatosRonda() {

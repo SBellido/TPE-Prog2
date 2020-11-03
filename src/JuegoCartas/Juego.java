@@ -49,7 +49,6 @@ public class Juego {
 			this.asignarResultadoRonda(ronda, jugadorTurno, jugadorSinTurno, 
 					atributoElegido, cartaTurno, cartaSinTurno);
 			ronda++;
-			System.out.println("\n" + ronda);
 		}
 	}	
 	
@@ -57,23 +56,22 @@ public class Juego {
 			Atributo atributoElegido, Carta cartaTurno, Carta cartaSinTurno) {
 			double valorCartaTurnoConPocima = cartaTurno.valorconPocima(atributoElegido);
 			double valorCartaSinTurnoConPocima = cartaSinTurno.valorconPocima(atributoElegido);
+			Jugador ganador = null;
+			Jugador perdedor = null;
 		
 		if (cartaSinTurno.esGanadora(cartaTurno, atributoElegido) == 0) {
 			jugadorTurno.agarrarCarta(cartaTurno);
 			jugadorSinTurno.agarrarCarta(cartaSinTurno);
-			Jugador ganador = new Jugador(" ninguno ", jugadorTurno.getCopiaCartas());
-			Jugador perdedor = new Jugador(" ninguno ", jugadorSinTurno.getCopiaCartas());
 			
-			this.historial.guardarHistorialRonda(ronda, ganador, perdedor, 
-					jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno, cartaSinTurno, 
+			this.historial.guardarHistorialRonda(ronda, ganador, perdedor, jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno, cartaSinTurno, 
 					valorCartaTurnoConPocima, valorCartaSinTurnoConPocima);
 			
 		} else if (cartaSinTurno.esGanadora(cartaTurno, atributoElegido) > 0) {
 			
 			jugadorSinTurno.ganar(cartaTurno, cartaSinTurno);
 			jugadorTurno.perder(cartaTurno);
-			Jugador ganador = jugadorSinTurno;
-			Jugador perdedor = jugadorTurno;
+			ganador = jugadorSinTurno;
+			perdedor = jugadorTurno;
 			jugadorSinTurno = this.asignarTurno();
 			jugadorTurno = this.getPerdedorRonda();
 			
@@ -83,8 +81,8 @@ public class Juego {
 		} else {
 			jugadorTurno.ganar(cartaSinTurno, cartaTurno);
 			jugadorSinTurno.perder(cartaSinTurno);
-			Jugador ganador = jugadorTurno;
-			Jugador perdedor = jugadorSinTurno;
+			ganador = jugadorTurno;
+			perdedor = jugadorSinTurno;
 			jugadorTurno = this.asignarTurno();
 			jugadorSinTurno = this.getPerdedorRonda();
 			

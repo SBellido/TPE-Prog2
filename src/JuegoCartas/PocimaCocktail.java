@@ -13,10 +13,13 @@ public class PocimaCocktail extends ElementoPocima {
 
 	@Override
 	protected double incorporarAditivo(Atributo atributo) {
-		double result = 0;
-		for (ElementoPocima elementoPocima : this.pocimas)
-			result += elementoPocima.incorporarAditivo(atributo);
-		return result;
+		double valorTemp = 0;
+		Atributo copia = new Atributo(atributo.getNombre(), atributo.getValor());
+		for (ElementoPocima elementoPocima : this.pocimas) {
+			valorTemp = elementoPocima.incorporarAditivo(copia);
+			copia = new Atributo(copia.getNombre(), valorTemp);
+		}
+		return valorTemp;
 	}
 	
 	public void agregarPocima(ElementoPocima pocima) {

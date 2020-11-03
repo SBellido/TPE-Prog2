@@ -12,7 +12,7 @@ public class PocimaAtributoSelectivo extends Pocima {
 	@Override
 	public double incorporarAditivo(Atributo atributo) {
 		if (atributo.getNombre().equals(this.nombreAtributo))
-			return atributo.getValor() + (atributo.getValor() * this.porcentaje);
+			return super.incorporarAditivo(atributo);
 		else return atributo.getValor();
 	}
 	

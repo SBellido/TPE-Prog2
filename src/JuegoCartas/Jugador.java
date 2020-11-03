@@ -22,9 +22,8 @@ public class Jugador {
 	}
 
 	public Carta seleccionarCarta() {
-		if (this.cartas != null || (!this.cartas.estaVacio())) {
+		if (this.cartas != null || (!this.cartas.estaVacio()))
 			return this.cartas.verCarta();
-		}
 		return null;
 	}
 
@@ -46,14 +45,12 @@ public class Jugador {
 	}
 
 	public int contarCartas() {
-		System.out.println("entra");
-		System.out.println(this.getNombre());
 		int total = this.cartas.obtenerCantCartas();
-		System.out.println(this.getNombre() + " total "+total);
 		return total;
 	}
 
 	public void agarrarCarta(Carta carta) {
+		this.cartas.eliminarCarta(carta);
 		this.cartas.agregarCarta(carta);
 	}
 

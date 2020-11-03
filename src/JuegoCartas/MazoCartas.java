@@ -50,9 +50,9 @@ public class MazoCartas {
 	}
 
 	public void agregarCarta(Carta carta) {
-		if (this.verificarCarta(carta) && (!this.contieneCarta(carta)))
-			this.mazo.add(carta);
-		else if (this.estaVacio())
+		if (this.verificarCarta(carta) && (!this.contieneCarta(carta))) {
+			this.mazo.add(carta);		
+		} else if (this.estaVacio())
 			this.mazo.add(carta);
 	}
 
