@@ -1,16 +1,20 @@
 package JuegoCartas;
 
 public class PocimaNumeroMagico extends Pocima {
-	private double valor;
+	public final static int NUMEROMAGICO = 10;
 	
-	public PocimaNumeroMagico(String nombre, double valor) {
-		super(nombre);
-		this.valor = valor;
+	public PocimaNumeroMagico(String nombre, double porcentaje) {
+		super(nombre, porcentaje);
 	}
 
 	@Override
-	protected double incorporarAditivo(Atributo atributo) {
-		return valor;
+	public double incorporarAditivo(Atributo atributo) {
+		return this.porcentaje * NUMEROMAGICO;
 	}
-
 }
+
+
+
+
+
+

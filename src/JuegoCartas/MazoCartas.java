@@ -6,14 +6,18 @@ import java.util.List;
 
 
 public class MazoCartas {
-	private final int PRIMERACARTA = 0;
-	private int cantidad;
-	private List<Carta> mazo;
-	private List<Pocima> pocimas;
+	private final static int PRIMERACARTA = 0;
 	private final static int MAX = 100;
+	private final static int MED = 50;
 	private final static int MIN = 1;
-	private final static int MIDDLE = 50;
+ 	private List<Carta> mazo;
+	private List<ElementoPocima> pocimas;
 
+	
+	public MazoCartas(List<Carta> mazo, List<ElementoPocima> pocimas) {
+		this.mazo = mazo;
+		this.pocimas = pocimas;
+	}
 	public MazoCartas() {
 		this.mazo = new ArrayList<>();
 		this.pocimas = new ArrayList<>();
@@ -23,10 +27,9 @@ public class MazoCartas {
 		return this.mazo.get(PRIMERACARTA);
 	}
 
-	public boolean verificarSiEsDelMazo(Carta cartaVerificada) {
-		for (Carta carta : this.mazo) {
-			return carta.compararAtributo(cartaVerificada);
-		}
+	public boolean verificarCarta(Carta cartaNueva) {
+		for (Carta carta : this.mazo)
+			return carta.compararAtributos(cartaNueva);
 		return false;
 	}
 
@@ -42,12 +45,12 @@ public class MazoCartas {
 		return this.mazo.isEmpty();
 	}
 
-	public void agregarPocima(Pocima pocima) {
+	public void agregarPocima(ElementoPocima pocima) {
 		this.pocimas.add(pocima);
 	}
 
 	public void agregarCarta(Carta carta) {
-		if (this.verificarSiEsDelMazo(carta) && (!this.contieneCarta(carta)))
+		if (this.verificarCarta(carta) && (!this.contieneCarta(carta)))
 			this.mazo.add(carta);
 		else if (this.estaVacio())
 			this.mazo.add(carta);
@@ -58,7 +61,7 @@ public class MazoCartas {
 			this.mazo.remove(cartaPerdedora);
 	}
 
-	public int getCantMazoCompleto() {
+	public int obtenerCantCartas() {
 		return this.mazo.size();
 	}
 
@@ -77,7 +80,7 @@ public class MazoCartas {
 		for (Carta carta : this.mazo) {
 			if (this.seAsigna()) {
 				indice = (int) Math.floor(Math.random() * this.pocimas.size());
- 				Pocima pocimaAleatoria = this.pocimas.get(indice);
+ 				ElementoPocima pocimaAleatoria = this.pocimas.get(indice);
 				carta.setPocima(pocimaAleatoria);
 			}
 		}
@@ -86,14 +89,21 @@ public class MazoCartas {
 	private boolean seAsigna() {
 		boolean result = true;
 		int value = (int) Math.floor(Math.random() * (MAX - MIN)) + MIN;
-		if (value >= MIDDLE)
+		if (value <= MED)
 			result = false;
 		return result;
 	}
 
+	public MazoCartas copiarse() {
+		MazoCartas copia = new MazoCartas(this.mazo, this.pocimas);
+		return copia;
+	}
+	
 	@Override
 	public String toString() {
-		return "\nCantidad de cartas: " + this.getCantMazoCompleto() + "\nMazo: " + this.mazo;
+		return "\nCantidad de cartas: " + this.obtenerCantCartas() + "\nMazo: " + this.mazo;
 	}
+	
+
 
 }

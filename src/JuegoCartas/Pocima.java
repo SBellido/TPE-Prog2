@@ -1,19 +1,20 @@
 package JuegoCartas;
 
-public abstract class Pocima {
-	protected String nombre;
+public class Pocima extends ElementoPocima {
+	protected double porcentaje;
 	
-	protected Pocima() {}
-	protected Pocima(String nombre) {
-		this.nombre = nombre;
+	public Pocima(String nombre, double porcentaje) {
+		super(nombre);
+		this.porcentaje = porcentaje;
 	}
 
-	protected abstract double incorporarAditivo(Atributo atributo);
-
-	public String getNombre() {
-		return nombre;
+	@Override
+	public double incorporarAditivo(Atributo atributo) {
+		return atributo.getValor() + (atributo.getValor() * this.porcentaje);
 	}
 	
-	
-	
+	public double getPorcentaje() {
+		return this.porcentaje;
+	}
+
 }

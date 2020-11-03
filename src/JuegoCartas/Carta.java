@@ -6,9 +6,8 @@ import java.util.List;
 
 public class Carta {
 	private String nombre;
-	private String id;
+	private ElementoPocima  pocima;
 	private List<Atributo> atributos;
-	private Pocima pocima;
 
 	public Carta(String nombre) {
 		this.nombre = nombre;
@@ -16,25 +15,11 @@ public class Carta {
 	}
 
 	
-	public Carta(String nombre, String id) {
-		this.id = id;
-		this.atributos = new ArrayList<>();
+	public void agregarAtributo(Atributo atributo) {
+		if (!this.tieneAtributo(atributo))
+			this.atributos.add(atributo);
 	}
-
 	
-	public double obtenerValorconPocima(Atributo atributoElegido) {
-		double atributoConPocima = 0;
-		double atributoSinPocima = atributoElegido.getValor();
-		Atributo copia = this.aplicarPocima(atributoElegido);
-		
-		if (this.tienePocima()) {
-			copia = this.aplicarPocima(atributoElegido);
-			atributoConPocima = copia.getValor();
-			return atributoConPocima;
-		}
-		return atributoSinPocima;
-	}
-
 	
 	public boolean tieneAtributo(Atributo atributo) {
 		return this.atributos.contains(atributo);
@@ -52,11 +37,11 @@ public class Carta {
 	}
 
 	
-	public boolean compararAtributo(Carta cartaComparada) {
+	public boolean compararAtributos(Carta cartaComparada) {
 		int count = 0;
 		int cantAtributos = this.contarAtributos();
 
-		if (cartaComparada.contarAtributos() == this.atributos.size()) {
+		if (cartaComparada.contarAtributos() == cantAtributos) {
 			for (Atributo atributo : this.atributos) {
 				if (cartaComparada.tieneAtributo(atributo))
 					count++;
@@ -64,12 +49,6 @@ public class Carta {
 			return count == cantAtributos;
 		}
 		return false;
-	}
-
-	
-	public void agregarAtributo(Atributo atributo) {
-		if (!tieneAtributo(atributo))
-			this.atributos.add(atributo);
 	}
 
 	
@@ -117,17 +96,30 @@ public class Carta {
 	
 	public Atributo aplicarPocima(Atributo atributoElegido) {
 		Atributo copia = new Atributo();
-		if (this.pocima != null) {
+		if (this.tienePocima()) {
 			for (Atributo atributo : this.atributos) {
 				if (atributo.equals(atributoElegido)) {
+					double valor = pocima.incorporarAditivo(atributoElegido);
 					copia.setNombre(atributo.getNombre());
-					copia.setValor(atributo.getValor());
-					this.pocima.incorporarAditivo(copia);
+					copia.setValor(valor);
 					return copia;
 				}
 			}
 		}
 		return atributoElegido;
+	}
+
+
+	public double valorconPocima(Atributo atributoElegido) {
+		double atributoConPocima = 0;
+		double atributoSinPocima = atributoElegido.getValor();
+		Atributo copia = this.buscarAtributo(atributoElegido);		
+		
+		if (this.tienePocima()) {
+			atributoConPocima = this.pocima.incorporarAditivo(copia);	
+			return atributoConPocima;
+		}
+		return copia.getValor();
 	}
 
 	
@@ -149,17 +141,14 @@ public class Carta {
 
 	
 	// GETTERS & SETTERS
-	public String getId() {
-		return id;
-	}
 	public String getNombre() {
 		return nombre;
 	}
-	public Pocima getPocima() {
+	public ElementoPocima getPocima() {
 		return this.pocima;
 	}
-	public void setPocima(Pocima pocima) {
+	public void setPocima(ElementoPocima pocima) {
 		this.pocima = pocima;
 	}
-
+	
 }

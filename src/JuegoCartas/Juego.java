@@ -33,7 +33,7 @@ public class Juego {
 		return ganador;
 	}
 
-	public void jugar() {
+	public void comenzar() {
 		int ronda = 0;
 		mazo.repartirCartas(jugadorA, jugadorB);
 		
@@ -55,18 +55,20 @@ public class Juego {
 	
 	public void asignarResultadoRonda(int ronda, Jugador jugadorTurno, Jugador jugadorSinTurno,
 			Atributo atributoElegido, Carta cartaTurno, Carta cartaSinTurno) {
+			double valorCartaTurnoConPocima = cartaTurno.valorconPocima(atributoElegido);
+			double valorCartaSinTurnoConPocima = cartaSinTurno.valorconPocima(atributoElegido);
 		
 		if (cartaSinTurno.esGanadora(cartaTurno, atributoElegido) == 0) {
 			jugadorTurno.agarrarCarta(cartaTurno);
 			jugadorSinTurno.agarrarCarta(cartaSinTurno);
-			Jugador ganador = new Jugador(" ninguno ");
-			Jugador perdedor = new Jugador(" ninguno ");
+			Jugador ganador = new Jugador(" ninguno ", jugadorTurno.getCopiaCartas());
+			Jugador perdedor = new Jugador(" ninguno ", jugadorSinTurno.getCopiaCartas());
 			
 			this.historial.guardarHistorialRonda(ronda, ganador, perdedor, 
-					jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno, cartaSinTurno);
+					jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno, cartaSinTurno, 
+					valorCartaTurnoConPocima, valorCartaSinTurnoConPocima);
 			
 		} else if (cartaSinTurno.esGanadora(cartaTurno, atributoElegido) > 0) {
-			double valorCartaTurno = cartaTurno.obtenerValorconPocima(atributoElegido);
 			
 			jugadorSinTurno.ganar(cartaTurno, cartaSinTurno);
 			jugadorTurno.perder(cartaTurno);
@@ -76,7 +78,8 @@ public class Juego {
 			jugadorTurno = this.getPerdedorRonda();
 			
 			this.historial.guardarHistorialRonda(ronda, ganador, perdedor, 
-					jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno, cartaSinTurno);
+					jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno, cartaSinTurno,
+					valorCartaTurnoConPocima, valorCartaSinTurnoConPocima);
 		} else {
 			jugadorTurno.ganar(cartaSinTurno, cartaTurno);
 			jugadorSinTurno.perder(cartaSinTurno);
@@ -86,7 +89,8 @@ public class Juego {
 			jugadorSinTurno = this.getPerdedorRonda();
 			
 			this.historial.guardarHistorialRonda(ronda, ganador, perdedor, 
-					jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno, cartaSinTurno);
+					jugadorTurno, jugadorSinTurno, atributoElegido, cartaTurno, cartaSinTurno,
+					valorCartaTurnoConPocima, valorCartaSinTurnoConPocima);
 		}
 	}
 
@@ -97,8 +101,7 @@ public class Juego {
 				ronda == this.maxRondas);
 	}
 
-// GETTERS & SETTERS
-
+	
 	@Override
 	public String toString() {
 		return "\nJUEGO" + 
@@ -106,38 +109,29 @@ public class Juego {
 				"\nJugador A: " + this.getJugadorA() + 
 				"\nJugador B: " + this.getJugadorB();
 	}
-
+	
+	
 	// GETTERS & SETTERS
-	public int getMaxRondas() {
-		return maxRondas;
-	}
-
-	public void setMaxRondas(int maxRondas) {
-		this.maxRondas = maxRondas;
-	}
-
-	public MazoCartas getMazo() {
-		return mazo;
-	}
-
 	public Jugador getJugadorA() {
 		return jugadorA;
 	}
-
 	public Jugador getJugadorB() {
 		return jugadorB;
 	}
-
-	public void setPerdedorRonda(Jugador perdedorRonda) {
-		this.perdedorRonda = perdedorRonda;
-	}
-
 	public Jugador getPerdedorRonda() {
 		return this.perdedorRonda;
 	}
-
+	public int getMaxRondas() {
+		return maxRondas;
+	}
 	public Historial getHistorial() {
 		return this.historial;
+	}
+	public void setPerdedorRonda(Jugador perdedorRonda) {
+		this.perdedorRonda = perdedorRonda;
+	}
+	public void setMaxRondas(int maxRondas) {
+		this.maxRondas = maxRondas;
 	}
 
 }

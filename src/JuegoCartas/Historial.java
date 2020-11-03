@@ -11,7 +11,8 @@ public class Historial {
 	}
 
 	public void guardarHistorialRonda(int ronda, Jugador ganador, Jugador perdedor, Jugador jugadorTurno,
-			Jugador JugadorSinTurno, Atributo atributoElegido, Carta cartaTurno, Carta cartaSinTurno) {
+			Jugador JugadorSinTurno, Atributo atributoElegido, Carta cartaTurno, Carta cartaSinTurno,
+			double valorCartaTurnoConPocima, double valorCartaSinTurnoConPocima) {
 
 		Atributo atributoSinTurno = cartaSinTurno.buscarAtributo(atributoElegido);
 		double valorAtributoCartaSinTurno = atributoSinTurno.getValor();
@@ -34,8 +35,8 @@ public class Historial {
 			nombrePocimaSinTurno = cartaSinTurno.getPocima().getNombre();				
 		}
 			
-		double cantCartasGanador = ganador.contarCartas();
-		double cantCartasPerdedor = perdedor.contarCartas();
+		int cantCartasGanador = ganador.contarCartas();
+		int cantCartasPerdedor = perdedor.contarCartas();
 		
 		String nombreGanador = ganador.getNombre();
 		String nombrePerdedor = perdedor.getNombre();
@@ -44,9 +45,9 @@ public class Historial {
 		this.datosRonda.add("------- Ronda " + ronda + " -------\n");
 		this.datosRonda.add("El jugador " + nombreJugTurno + " selecciona competir por el atributo " + nombreAtributo + "\n");
 		this.datosRonda.add("La carta de " + nombreJugTurno + " es " + nombreSuperHeroeTurno + " con " + nombreAtributo
-				+ " " + valorAtributoCartaTurno + ", se aplicó la pócima "+ nombrePocimaTurno + " valor resultante\n");
+				+ " " + valorAtributoCartaTurno + ", se aplicó la pócima "+ nombrePocimaTurno + " valor resultante " + valorCartaTurnoConPocima);
 		this.datosRonda.add("La carta de " + nombreJugSinTurno + " es " + nombreSuperHeroeSinTurno + " con "
-				+ nombreAtributo + " " + valorAtributoCartaSinTurno + "\n");
+				+ nombreAtributo + " " + valorAtributoCartaSinTurno + ", se aplicó la pócima " + nombrePocimaSinTurno + " valor resultante " + valorCartaSinTurnoConPocima);
 		this.datosRonda.add("Gana la ronda " + nombreGanador + ".\n");
 		this.datosRonda.add(nombreJugTurno + " posee ahora " + cantCartasGanador + " cartas y " + nombreJugSinTurno
 				+ " posee ahora " + cantCartasPerdedor + " cartas.\n");

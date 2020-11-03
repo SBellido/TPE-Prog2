@@ -2,18 +2,20 @@ package JuegoCartas;
 
 public class Jugador {
 	private static int id;
-	private int numbreId;
+	private int numeroId;
 	private String nombre;
 	private MazoCartas cartas;
 	private boolean esGanador;
 	private Estrategia estrategia;
 	
-	public Jugador(String nombre) {
+	public Jugador(String nombre, MazoCartas cartas) {
 		this.nombre = nombre;
+		this.cartas = cartas;
+		
 	}
 	public Jugador(String nombre, Estrategia estrategia) {
 		this.nombre = nombre;
-		this.numbreId = id++;
+		this.numeroId = id++;
 		this.esGanador = false;
 		this.cartas = new MazoCartas();
 		this.estrategia = estrategia;
@@ -44,7 +46,11 @@ public class Jugador {
 	}
 
 	public int contarCartas() {
-		return this.cartas.getCantMazoCompleto();
+		System.out.println("entra");
+		System.out.println(this.getNombre());
+		int total = this.cartas.obtenerCantCartas();
+		System.out.println(this.getNombre() + " total "+total);
+		return total;
 	}
 
 	public void agarrarCarta(Carta carta) {
@@ -55,7 +61,7 @@ public class Jugador {
 	public boolean equals(Object obj) {
 		try {
 			Jugador aux = (Jugador) obj;
-			return this.getNumbreId() == aux.getNumbreId();
+			return this.getNumeroId() == aux.getNumeroId();
 		} catch (Exception e) {
 			return false;
 		}
@@ -64,40 +70,31 @@ public class Jugador {
 	@Override
 	public String toString() {
 		return "\n------------------------------" + "\nJUGADOR" + "\nNombre: " + this.getNombre() + "\nID: "
-				+ this.getNumbreId() + "\nCartas: " + this.getCartas();
+				+ this.getNumeroId() + "\nCartas: " + this.cartas;
 	}
 
 //	GETTERS & SETTERS
 	public String getNombre() {
 		return nombre;
 	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public void setCartas(MazoCartas mazo) {
-		this.cartas = mazo;
+	public int getNumeroId() {
+		return numeroId;
 	}
-
-	public MazoCartas getCartas() {
-		return this.cartas;
-	}
-
-	public int getNumbreId() {
-		return numbreId;
-	}
-
 	public boolean esGanador() {
 		return this.esGanador;
 	}
-
 	public void setEsGanador(boolean esGanador) {
 		this.esGanador = esGanador;
-	}
-	
+	}	
 	public void setEstrategia(Estrategia estrategia) {
 		this.estrategia = estrategia;
+	}
+	public MazoCartas getCopiaCartas() {	
+		MazoCartas cartasCopia = this.cartas.copiarse();
+		return cartasCopia;
 	}
 
 }

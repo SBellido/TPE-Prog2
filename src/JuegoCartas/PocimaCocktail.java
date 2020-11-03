@@ -1,19 +1,26 @@
 package JuegoCartas;
 
-public class PocimaCocktail extends Pocima {
-	private Pocima poc1, poc2;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PocimaCocktail extends ElementoPocima {
+	private List<ElementoPocima> pocimas;
 	
-	public PocimaCocktail(String nombre, Pocima poc1, Pocima poc2) {
+	public PocimaCocktail(String nombre) {
 		super(nombre);
-		this.poc1 = poc1;
-		this.poc2 = poc2;
+		this.pocimas = new ArrayList<>();
 	}
 
 	@Override
 	protected double incorporarAditivo(Atributo atributo) {
-		return (poc1.incorporarAditivo(atributo) + 
-				poc2.incorporarAditivo(atributo));
-
+		double result = 0;
+		for (ElementoPocima elementoPocima : this.pocimas)
+			result += elementoPocima.incorporarAditivo(atributo);
+		return result;
+	}
+	
+	public void agregarPocima(ElementoPocima pocima) {
+		pocimas.add(pocima);
 	}
 
 }
